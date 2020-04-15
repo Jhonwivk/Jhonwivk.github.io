@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="串传送指令MOVS功能：将由SI作为指针的源串中的一个字节或字，传送到由DI作为指针的目标串中，且相应地自动修改SI&#x2F;DI，指向下一个元素。加上无条件重复前缀REP，则每传送一个元素，CX自动减1，直到CX为0为止。(DF为1每次操作后变址寄存器SI和DI减小，为0则增大) 串比较指令CMPS功能：将由SI作为指针的源串中的一个元素减去由DI作为指针的目标串中相应的一个元素，不返回结果，只根据结果">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/loading.gif">
-<meta property="og:image" content="http://yoursite.com/images/loading.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/image-20200415150748650.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/20200415152730.png">
 <meta property="article:published_time" content="2020-04-14T10:53:25.000Z">
 <meta property="article:modified_time" content="2020-04-15T09:59:22.768Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/loading.gif">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/image-20200415150748650.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -102,45 +102,19 @@
 <blockquote>
 <p>eg.比较两串是否相同，若相同，则BX寄存器内容为0；若两串不同，则BX指向源串中第一个不相同字节的地址，且该字节的内容保留在AL寄存器中。</p>
 </blockquote>
-<pre><code>        CLD ;将DF清0
-        MOV  CX, 100
-        MOV SI, 2500H
-        REPE CMPSB ;串比较，直到两数相等即ZF=0或CX=0
-        JZ EQQ ；ZF等于1直接结束，ZF等于0则向下
-        DEC SI
-        MOV BX,SI
-        MOV AL,[SI]
-        JMP STOP
-EQQ:    MOV BX,0
-STOP:    HLT      </code></pre><h4 id="串搜索指令"><a href="#串搜索指令" class="headerlink" title="串搜索指令"></a>串搜索指令</h4><p>SCAS功能：用来从目标数据串中搜索(或查找)某个关键字，要求将带查找的关键字在执行该指令前事先置入AX或AL中，取决于W=1或0。其实是比较目标串和AX/AL中的内容比较。不返回结果，只重置标志位，然后修改DI指向下一地址。在SCAS前加不等/不为0重复前缀REPNE/REPNZ，用来从目标串中寻找关键字，操作直到ZF=1(查到了关键字)或CX=0(终止未查到)为止。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        CLD ;将DF清0</span><br><span class="line">        MOV  CX, 100</span><br><span class="line">        MOV SI, 2500H</span><br><span class="line">        REPE CMPSB ;串比较，直到两数相等即ZF&#x3D;0或CX&#x3D;0</span><br><span class="line">        JZ EQQ ；ZF等于1直接结束，ZF等于0则向下</span><br><span class="line">        DEC SI</span><br><span class="line">        MOV BX,SI</span><br><span class="line">        MOV AL,[SI]</span><br><span class="line">        JMP STOP</span><br><span class="line">EQQ:	MOV BX,0</span><br><span class="line">STOP:    HLT</span><br></pre></td></tr></table></figure>
+
+<h4 id="串搜索指令"><a href="#串搜索指令" class="headerlink" title="串搜索指令"></a>串搜索指令</h4><p>SCAS功能：用来从目标数据串中搜索(或查找)某个关键字，要求将带查找的关键字在执行该指令前事先置入AX或AL中，取决于W=1或0。其实是比较目标串和AX/AL中的内容比较。不返回结果，只重置标志位，然后修改DI指向下一地址。在SCAS前加不等/不为0重复前缀REPNE/REPNZ，用来从目标串中寻找关键字，操作直到ZF=1(查到了关键字)或CX=0(终止未查到)为止。</p>
 <blockquote>
 <p>eg.要求在长度为N的某字符串中查找是否存在“$”字符。若存在，则将”$”字符所在地址送入BX寄存器中，否则将BX清”0”。假定首字符偏移地址为DSTO。</p>
 </blockquote>
-<p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/image-20200415150748650.png" alt=""></p>
-<p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/20200415152730.png" alt=""></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<p><img src="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/image-20200415150748650.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/20200415152730.png" alt=""></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/14/chuan/" data-id="ck91iwt390003gkw02a9h8mw1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/14/chuan/" data-id="ck91jhxbx000318w02y1k8his" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
