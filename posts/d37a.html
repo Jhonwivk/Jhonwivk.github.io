@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="test, Hairen">
+    <meta name="keywords" content="串操作指令, Hairen">
     <meta name="description" content="努力学习，享受生活">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>test | Hairen</title>
+    <title>串操作指令 | Hairen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -249,12 +249,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">test</h1>
+                    <h1 class="description center-align post-title">串操作指令</h1>
                 </div>
             </div>
         </div>
@@ -371,14 +371,23 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/test/">
-                                <span class="chip bg-color">test</span>
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">学习笔记</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" class="post-category">
+                                微机原理
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -387,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-03-15
+                    2020-04-14
                 </div>
                 
 
@@ -396,7 +405,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    63
+                    583
                 </div>
                 
 
@@ -409,11 +418,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+                <h4 id="串传送指令"><a href="#串传送指令" class="headerlink" title="串传送指令"></a>串传送指令</h4><p>MOVS功能：将由SI作为指针的源串中的一个字节或字，传送到由DI作为指针的目标串中，且相应地自动修改SI/DI，指向下一个元素。加上无条件重复前缀REP，则每传送一个元素，CX自动减1，直到CX为0为止。(DF为1每次操作后变址寄存器SI和DI减小，为0则增大)</p>
+<h4 id="串比较指令"><a href="#串比较指令" class="headerlink" title="串比较指令"></a>串比较指令</h4><p>CMPS功能：将由SI作为指针的源串中的一个元素减去由DI作为指针的目标串中相应的一个元素，不返回结果，只根据结果特征置标志位；并相应地修改SI和DI内容指向下一个元素。在CMPS指令前加相等/为0时重复前缀REPE/REPZ，用来确定两个串中的第一个不相同的数据。</p>
+<hr>
+<blockquote>
+<p>eg.比较两串是否相同，若相同，则BX寄存器内容为0；若两串不同，则BX指向源串中第一个不相同字节的地址，且该字节的内容保留在AL寄存器中。</p>
+</blockquote>
+<pre><code>        CLD ;将DF清0
+        MOV  CX, 100
+        MOV SI, 2500H
+        REPE CMPSB ;串比较，直到两数相等即ZF=0或CX=0
+        JZ EQQ ；ZF等于1直接结束，ZF等于0则向下
+        DEC SI
+        MOV BX,SI
+        MOV AL,[SI]
+        JMP STOP
+EQQ:    MOV BX,0
+STOP:    HLT      </code></pre><h4 id="串搜索指令"><a href="#串搜索指令" class="headerlink" title="串搜索指令"></a>串搜索指令</h4><p>SCAS功能：用来从目标数据串中搜索(或查找)某个关键字，要求将带查找的关键字在执行该指令前事先置入AX或AL中，取决于W=1或0。其实是比较目标串和AX/AL中的内容比较。不返回结果，只重置标志位，然后修改DI指向下一地址。在SCAS前加不等/不为0重复前缀REPNE/REPNZ，用来从目标串中寻找关键字，操作直到ZF=1(查到了关键字)或CX=0(终止未查到)为止。</p>
+<blockquote>
+<p>eg.要求在长度为N的某字符串中查找是否存在“$”字符。若存在，则将”$”字符所在地址送入BX寄存器中，否则将BX清”0”。假定首字符偏移地址为DSTO。</p>
+</blockquote>
+<p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/image-20200415150748650.png" alt=""></p>
+<p><img src="/images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Jhonwivk/hairen-image/images/20200415152730.png" alt=""></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -457,7 +483,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/Jhonwivk/posts/f82e.html">https://github.com/Jhonwivk/posts/f82e.html</a>
+                    <a href="https://github.com/Jhonwivk/posts/d37a.html">https://github.com/Jhonwivk/posts/d37a.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -495,8 +521,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/test/">
-                                    <span class="chip bg-color">test</span>
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">学习笔记</span>
                                 </a>
                             
                         </div>
@@ -667,35 +693,33 @@
                 <i class="far fa-dot-circle"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/posts/f82e.html">
+                <a href="/posts/d37a.html">
                     <div class="card-image">
                         
                         
-                        <img src="/images/loading.gif" data-original="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/images/loading.gif" data-original="/medias/featureimages/22.jpg" class="responsive-img" alt="串操作指令">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title">串操作指令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #include &lt;stdio.h>
-int main(){
-    printf("hello world");
-    return 0;
-}
-
-        document.querySelectorAll('.github
+                            串传送指令MOVS功能：将由SI作为指针的源串中的一个字节或字，传送到由DI作为指针的目标串中，且相应地自动修改SI/DI，指向下一个元素。加上无条件重复前缀REP，则每传送一个元素，CX自动减1，直到CX为0为止。(DF为1每次操作后变址
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-14
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Hairen
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/" class="post-category">
+                                    微机原理
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -704,8 +728,8 @@ int main(){
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/test/">
-                        <span class="chip bg-color">test</span>
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
                     </a>
                     
                 </div>
@@ -894,7 +918,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">188</span>&nbsp;字
+                class="white-color">708</span>&nbsp;字
             
             
             
@@ -1026,7 +1050,7 @@ $(function () {
   <script src="/libs/instantpage/instantpage.js" type="module"></script>
   
 
-<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script>
+
         <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
         <script>
         $('a').each(function() {
@@ -1045,6 +1069,6 @@ $(function () {
             }
           }
         });
-        </script></body>
+        </script><script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
 </html>
