@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>princess on bookstack</title>
-    <link>https://jhonwivk.github.io/tags/princess/</link>
-    <description>Recent content in princess on bookstack</description>
+    <title>1 on bookstack</title>
+    <link>https://jhonwivk.github.io/a-little-princess/test/</link>
+    <description>Recent content in 1 on bookstack</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 01 Jan 1906 00:00:00 +0000</lastBuildDate><atom:link href="https://jhonwivk.github.io/tags/princess/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Jan 1906 00:00:00 +0000</lastBuildDate><atom:link href="https://jhonwivk.github.io/a-little-princess/test/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.1</title>
       <link>https://jhonwivk.github.io/a-little-princess/test/copy/</link>
@@ -17,11 +17,11 @@ She was such a little girl that one did not expect to see such a look on her sma
     </item>
     
     <item>
-      <title>2</title>
-      <link>https://jhonwivk.github.io/a-little-princess/copy/</link>
+      <title>1.2</title>
+      <link>https://jhonwivk.github.io/a-little-princess/test/faq/</link>
       <pubDate>Mon, 01 Jan 1906 00:00:00 +0000</pubDate>
       
-      <guid>https://jhonwivk.github.io/a-little-princess/copy/</guid>
+      <guid>https://jhonwivk.github.io/a-little-princess/test/faq/</guid>
       <description>Once on a dark winter’s day, when the yellow fog hung so thick and heavy in the streets of London that the lamps were lighted and the shop windows blazed with gas as they do at night, an odd- looking little girl sat in a cab with her father and was driven rather slowly through the big thoroughfares.
 She sat with her feet tucked under her, and leaned against her father, who held her in his arm, as she stared out of the window at the passing people with a queer old-fashioned thoughtfulness in her big eyes.</description>
     </item>
