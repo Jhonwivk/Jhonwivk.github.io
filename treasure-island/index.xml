@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>treasure-island on bookstack</title>
+    <link>https://jhonwivk.github.io/treasure-island/</link>
+    <description>Recent content in treasure-island on bookstack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 01 Jan 1883 00:00:00 +0000</lastBuildDate><atom:link href="https://jhonwivk.github.io/treasure-island/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Treasure Island</title>
+      <link>https://jhonwivk.github.io/treasure-island/cover/</link>
+      <pubDate>Mon, 01 Jan 1883 00:00:00 +0000</pubDate>
+      
+      <guid>https://jhonwivk.github.io/treasure-island/cover/</guid>
+      <description>Squire Trelawney, Dr. Livesey, and the rest of these gentlemen having asked me to write down the whole particulars about Treasure Island, from the beginning to the end, keeping nothing back but the bearings of the island, and that only because there is still treasure not yet lifted, I take up my pen in the year of grace 17__ and go back to the time when my father kept the Admiral Benbow inn and the brown old seaman with the sabre cut first took up his lodging under our roof.</description>
+    </item>
+    
+  </channel>
+</rss>
